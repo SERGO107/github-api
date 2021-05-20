@@ -32,7 +32,7 @@ const UserCard = ({error,name,userName,following,avatar, repos, followers}) => {
       </a>
             </Card.Content>
           </Card>
-        </div>)
+        </div>
     </div>
   
   )}

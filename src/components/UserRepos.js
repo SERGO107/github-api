@@ -1,32 +1,36 @@
-import React, { useState, useEffect } from 'react'
 
-const UserRepos = ({ login }) => {
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
-    const [posts, setPosts] = useState([])
-    // const [setrepos, setUserRepos] = useState([])
+function UserRepos({ login }) {
+    const [data, setData] = useState([]);
+    // const [query, setQuery] = useState('');
+
     useEffect(() => {
-        fetch(`https://api.github.com/users/${login}/repos?page=2&per_page=100&page=1`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setPosts(data);
-            })
-    }, [login])
+        function getFetchUrl() {
+            return `https://api.github.com/users/${login}/repos?page=2&per_page=100&page=1`;
+        }
+
+        async function fetchData() {
+            const result = await axios(getFetchUrl());
+            setData(result.data);
+            console.log(result.data.map(item =>(item.description)))
+        }
+
+        fetchData();
+    }, [login]);
+
     return (
-        <ul >
-            {posts.map(post => (
-                <div>
-                    <a>
-                        <li key={post.id} >
-                            {post.name}
-                        </li>
-                    </a>
-                    <li key={post.node_id} >
-                        {post.description}
+        <>
+            <ul>
+                {data.map(item => (
+                    <li key={item.id}>
+                        <a href={item.html_url}>{item.name}</a>
                     </li>
-                </div>
-            ))}
-        </ul>
-    )
+                ))}
+            </ul>
+        </>
+    );
 }
+
 export default UserRepos

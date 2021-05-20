@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Card, Image, Icon } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import UserCard from './components/UserCard'
 import UserRepos from './components/UserRepos'
 import './App.css';
