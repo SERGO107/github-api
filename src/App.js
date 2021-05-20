@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Card, Image, Icon } from 'semantic-ui-react'
+import UserCard from './components/UserCard'
+import UserRepos from './components/UserRepos'
 import './App.css';
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setData(data)
+        
       })
   }, [])
   const setData = ({ name, login, followers, following, public_repos, avatar_url }) => {
@@ -36,59 +39,42 @@ function App() {
       .then(data => {
         if (data.message) {
           setError(data.message)
-        }else { 
-        setData(data)
-        setError(null)
+        } else {
+          setData(data)
+          setError(null)
         }
       })
   }
 
   return (
     <div >
-      <div className="navbar">Github Search</div>
-      <div className="search">
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              placeholder='GIT user'
-              name='name'
-              onChange={handleSearch}
-            />
-            <Form.Button content='Search' />
-          </Form.Group>
-        </Form>
+      <div className="navbar">
+        Github Search
+      <div className="input">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Input
+                placeholder='GIT user'
+                name='name'
+                onChange={handleSearch}
+              />
+            </Form.Group>
+          </Form>
+        </div>
       </div>
-      {error ? (
-        <h1>{error}</h1>
-      ) : (
-        <div className="card">
-          <Card>
-            <Image src={avatar} wrapped ui={false} alt ="" />
-            <Card.Content>
-              <Card.Header>{name}</Card.Header>
-              <Card.Header>{userName}</Card.Header>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name='user' />
-                {followers} followers
-      </a>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name='user' />
-                {repos} repos
-      </a>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name='user' />
-                {following} following
-      </a>
-            </Card.Content>
-          </Card>
-        </div>)}
 
+      <UserCard
+        name={name}
+        login={userName}
+        following={following}
+        followers={followers}
+        avatar={avatar}
+        repos={repos} 
+             
+      />
+      <UserRepos 
+      login={userName}
+      />
     </div>
   );
 }
