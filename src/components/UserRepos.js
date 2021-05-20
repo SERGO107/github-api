@@ -14,7 +14,7 @@ function UserRepos({ login }) {
         async function fetchData() {
             const result = await axios(getFetchUrl());
             setData(result.data);
-            console.log(result.data.map(item =>(item.description)))
+            console.log(result.data.map(item => (item.description)))
         }
 
         fetchData();
@@ -24,9 +24,14 @@ function UserRepos({ login }) {
         <>
             <ul>
                 {data.map(item => (
-                    <li key={item.id}>
-                        <a href={item.html_url}>{item.name}</a>
-                    </li>
+                    <div key={item.id}>
+                        <li >
+                            <a href={item.html_url}>{item.name}</a>
+                        </li>
+                        <li >
+                            {item.description}
+                        </li>
+                    </div >
                 ))}
             </ul>
         </>
