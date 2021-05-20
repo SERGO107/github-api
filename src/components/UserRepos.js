@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { List } from 'semantic-ui-react'
 
 function UserRepos({ login }) {
     const [data, setData] = useState([]);
-    // const [query, setQuery] = useState('');
 
     useEffect(() => {
+        if (login == null) return null;
         function getFetchUrl() {
             return `https://api.github.com/users/${login}/repos?page=2&per_page=100&page=1`;
         }
@@ -22,7 +23,7 @@ function UserRepos({ login }) {
 
     return (
         <>
-            <ul>
+            {/* <ul>
                 {data.map(item => (
                     <div key={item.id}>
                         <li >
@@ -33,7 +34,25 @@ function UserRepos({ login }) {
                         </li>
                     </div >
                 ))}
-            </ul>
+            </ul> */}
+
+            <List>
+                {data.map(item => (
+                    <List.Item>
+                        <List.Icon name='marker' />
+                        <List.Content>
+                            <List.Header as='a' href={item.html_url}>{item.name}</List.Header>
+                            <List.Description>
+                                {item.description}
+                            </List.Description>
+                        </List.Content>
+                    </List.Item>
+
+                ))}
+
+
+
+            </List>
         </>
     );
 }
