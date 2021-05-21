@@ -4,6 +4,7 @@ import { Form } from 'semantic-ui-react'
 import UserCard from './components/UserCard'
 import UserRepos from './components/UserRepos'
 import './App.css';
+import Pagination from './components/Pagination'
 
 function App() {
   const [name, setName] = useState('');
@@ -77,7 +78,10 @@ function App() {
         repos={repos}
 
       />
-      <UserRepos
+      {/* <UserRepos
+        login={userName}
+      /> */}
+      <Pagination
         login={userName}
       />
     </div>
