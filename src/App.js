@@ -8,7 +8,8 @@ import Pagination from './components/Pagination'
 
 
 function App() {
-  const [name, setName] = useState('pupilo');
+  const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
   const [userName, setUsername] = useState();
   const [followers, setFollowers] = useState('');
   const [following, setFollowing] = useState('');
@@ -16,6 +17,7 @@ function App() {
   const [avatar, setAvatar] = useState('https://hsto.org/getpro/habr/post_images/ed8/a02/65d/ed8a0265d9c3767b08d8cb162a218939.jpg');
   const [userInput, setUserInput] = useState('');
   const [error, setError] = useState('');
+  const [mes, setMes] = useState('');
 
   useEffect(() => {
     function getFetchUrl() {
@@ -24,23 +26,25 @@ function App() {
     async function fetchData() {
       const result = await axios(getFetchUrl());
       setData(result.data);
-      // console.log(result.data.map(item => (item.description)))
     }
     fetchData();
   }, [])
 
-  const setData = ({ name, login, followers, following, public_repos, avatar_url }) => {
+  const setData = ({ name, login, followers, following, public_repos, avatar_url, html_url }) => {
     setName(name)
     setUsername(login)
     setFollowers(followers)
     setFollowing(following)
     setRepos(public_repos)
     setAvatar(avatar_url)
+    setUrl(html_url)
   }
   const handleSearch = (e) => {
     setUserInput(e.target.value)
+    let m = e.currentTarget.value
+    setMes(m)
   }
-  // useEffect(() => {}, [])
+
 
   const handleSubmit = () => {
     fetch(`https://api.github.com/users/${userInput}`)
@@ -53,6 +57,7 @@ function App() {
           setError(null)
         }
       })
+    setMes("")
   }
 
   return (
@@ -66,6 +71,7 @@ function App() {
                 placeholder=''
                 name='name'
                 onChange={handleSearch}
+                value={mes}
               />
             </Form.Group>
           </Form>
@@ -79,6 +85,7 @@ function App() {
         followers={followers}
         avatar={avatar}
         repos={repos}
+        url={url}
       />
       {/* <UserRepos
         login={userName}
@@ -87,7 +94,7 @@ function App() {
         login={userName}
         repos={repos}
       />
-     
+
     </div>
   );
 }

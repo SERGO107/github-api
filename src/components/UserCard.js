@@ -2,15 +2,15 @@ import React from 'react';
 import { Card, Image, Icon } from 'semantic-ui-react'
 import './UserCard.css';
 
-const UserCard = ({ error, name, userName, following, avatar, repos, followers }) => {
+const UserCard = ({ error, name, userName, following, avatar, repos, followers, url }) => {
   return (
     <div>
       <div className="card">
         <Card>
-          <Image src={avatar} wrapped ui={true}  />
+          <Image src={avatar} wrapped ui={true} />
           <Card.Content>
             <Card.Header>{name}</Card.Header>
-            <Card.Header>{userName}</Card.Header>
+            <Card.Header><a href={url}>{userName}</a></Card.Header>
           </Card.Content>
           <Card.Content extra>
             <a>
