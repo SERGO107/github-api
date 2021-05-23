@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form } from 'semantic-ui-react'
 import UserCard from './components/UserCard'
-import UserRepos from './components/UserRepos'
 import './App.css';
 import Pagination from './components/Pagination'
 
@@ -44,8 +43,6 @@ function App() {
     let m = e.currentTarget.value
     setMes(m)
   }
-
-
   const handleSubmit = () => {
     fetch(`https://api.github.com/users/${userInput}`)
       .then(res => res.json())
@@ -59,7 +56,6 @@ function App() {
       })
     setMes("")
   }
-
   return (
     <div >
       <div className="navbar">
@@ -87,9 +83,7 @@ function App() {
         repos={repos}
         url={url}
       />
-      {/* <UserRepos
-        login={userName}
-      /> */}
+
       <Pagination
         login={userName}
         repos={repos}
