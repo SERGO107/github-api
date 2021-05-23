@@ -6,8 +6,9 @@ import UserRepos from './components/UserRepos'
 import './App.css';
 import Pagination from './components/Pagination'
 
+
 function App() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState('pupilo');
   const [userName, setUsername] = useState();
   const [followers, setFollowers] = useState('');
   const [following, setFollowing] = useState('');
@@ -23,7 +24,7 @@ function App() {
     async function fetchData() {
       const result = await axios(getFetchUrl());
       setData(result.data);
-      console.log(result.data.map(item => (item.description)))
+      // console.log(result.data.map(item => (item.description)))
     }
     fetchData();
   }, [])
@@ -39,6 +40,8 @@ function App() {
   const handleSearch = (e) => {
     setUserInput(e.target.value)
   }
+  // useEffect(() => {}, [])
+
   const handleSubmit = () => {
     fetch(`https://api.github.com/users/${userInput}`)
       .then(res => res.json())
@@ -60,7 +63,7 @@ function App() {
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Input
-                placeholder='GIT user'
+                placeholder=''
                 name='name'
                 onChange={handleSearch}
               />
@@ -76,14 +79,15 @@ function App() {
         followers={followers}
         avatar={avatar}
         repos={repos}
-
       />
       {/* <UserRepos
         login={userName}
       /> */}
       <Pagination
         login={userName}
+        repos={repos}
       />
+     
     </div>
   );
 }

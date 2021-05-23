@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+    <script>
+        fetch('https://api.github.com/users/gaearon/repos?&per_page=100')
+            .then(res => res.json())
+            .then(data =>
+                document.getElementById('root').innerHTML = JSON.stringify(data.map(item => item.name)))
+    </script>
+</body>
+
+</html>
+<!-- .then(ser => console.log(ser)) -->
