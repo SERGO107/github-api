@@ -9,7 +9,7 @@ import Pagination from './components/Pagination'
 function App() {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
-  const [userName, setUsername] = useState();
+  const [userName, setUsername] = useState(null);
   const [followers, setFollowers] = useState('');
   const [following, setFollowing] = useState('');
   const [repos, setRepos] = useState('');
@@ -59,10 +59,14 @@ function App() {
   return (
     <div >
       <div className="navbar">
-        Github Search
-      <div className="input">
+
+        <div className="input">
           <Form onSubmit={handleSubmit}>
             <Form.Group>
+              <div className="gthbicn">
+                <i class="github large icon"  ></i>
+              </div>
+
               <Form.Input
                 placeholder=''
                 name='name'
@@ -82,9 +86,11 @@ function App() {
         avatar={avatar}
         repos={repos}
         url={url}
+        error={error}
       />
 
       <Pagination
+        error={error}
         login={userName}
         repos={repos}
       />

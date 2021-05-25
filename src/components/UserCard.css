@@ -1,16 +1,37 @@
-.navbar {
-  padding: 20px;
-  background-color: blue;
-}
-
-.search {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-}
 
 .card {
+ 
   display: flex;
   justify-content: center;
-  padding: 20px 0;
+  padding: 20px ;
+  float: left;
+  margin: 10px, auto;
+  margin-left: 20px;
+}
+.user outline icon{
+  justify-content: center;
+  
+}
+.empty{
+/* padding-top: 100px; */
+ position:absolute;
+ /* padding-left: 100px; */
+
+ left: 50%;
+ top: 50%;
+ right: 50%;
+ bottom: 50%;
+
+  
+}
+.userNotFound{
+
+  position:absolute;
+  left: 40%;
+ top: 40%;
+ right: 50%;
+ bottom: 50%;
+}
+.roundimg{
+  border-radius: 100px;
 }

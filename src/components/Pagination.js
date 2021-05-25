@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { List } from 'semantic-ui-react'
 import ReactPaginate from 'react-paginate';
 import './Pagination.css'
 
-function Pagination({ login }) {
+function Pagination({ login, error, repos }) {
     const [offset, setOffset] = useState(0);
     const [arr, setData] = useState([]);
     const [perPage] = useState(10);
@@ -19,10 +20,18 @@ function Pagination({ login }) {
             .then(data => arr.push(...data.flat()))
 
         const sliced = arr.slice(offset, offset + perPage)
-        const postData = sliced.map(pd => <div key={pd.id}>
-            <p><a href={pd.html_url}>{pd.name}</a></p>
-            <p>{pd.description}</p>
-        </div>)
+        const postData = sliced.map(pd =>
+            <div id="wrap">
+                <List.Item key={pd.id}>
+                    <List.Icon name='github' size='large' verticalAlign='middle' />
+                    <List.Content>
+                        <List.Header as='a' href={pd.html_url}>{pd.name}</List.Header>
+                        <List.Description >{pd.description}</List.Description>
+                    </List.Content>
+                </List.Item>
+            </div>
+        )
+
         setData(postData)
         setPageCount(Math.ceil(arr.length / perPage))
         console.log(arr)
@@ -36,8 +45,28 @@ function Pagination({ login }) {
         if (login == null) return null;
         getData()
     }, [offset, login])
+
+    if (error) {
+        return (
+            <div>
+
+            </div>
+        )
+    }
+    if (login === null) {
+        return (<div>
+
+        </div>)
+    }
+    if (repos === 0) {
+        return (
+            <div className='reposNotFound'>                
+                <img src='https://cdn2.iconfinder.com/data/icons/documents-and-files-v-2/100/doc-03-256.png' />
+            </div>
+        )
+    }
     return (
-        <div className="App">
+        <div id="Ap">
             {arr}
             <ReactPaginate
                 previousLabel={"prev"}
@@ -55,3 +84,17 @@ function Pagination({ login }) {
     );
 }
 export default Pagination;
+{/* <div key={pd.id}>
+                    <p><a href={pd.html_url}>{pd.name}</a></p>
+                    <p>{pd.description}</p>
+                </div>) */}
+
+            //     <List divided relaxed >
+            //     <List.Item key={pd.id}>
+            //         <List.Icon name='github' size='large' verticalAlign='middle' />
+            //         <List.Content>
+            //             <List.Header as='a' href={pd.html_url}>{pd.name}</List.Header>
+            //             <List.Description as='a'>{pd.description}</List.Description>
+            //         </List.Content>
+            //     </List.Item>
+            // </List>

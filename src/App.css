@@ -1,11 +1,11 @@
-/* .navbar {
+.navbar {
   padding: 20px;
   background-color: blue;
 }
 
 .search {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   padding: 20px 0;
 }
 
@@ -13,4 +13,8 @@
   display: flex;
   justify-content: center;
   padding: 20px 0;
-} */
+}
+.gthbicn{
+  
+  padding-top: 8px ;
+}
