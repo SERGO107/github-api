@@ -10,20 +10,14 @@ function Pagination({ login, error, repos }) {
     const [perPage] = useState(10);
     const [pageCount, setPageCount] = useState(0)
 
-
-    const pages = Math.ceil(repos / 100)
     const arl = []
+    const pages = Math.ceil(repos / 100)
+    console.log(pages)
     for (let i = 1; i <= pages; i++) {
         arl.push(axios.get(`https://api.github.com/users/${login}/repos?page=2&per_page=100&page=${i}`))
     }
-
-
-
     const getData = async () => {
         const arr = []
-
-
-
         await axios.all([
             ...arl
         ]).then(res => res.map(item => item.data))
@@ -35,7 +29,7 @@ function Pagination({ login, error, repos }) {
                 <List.Item key={pd.id}>
                     <List.Icon name='github' size='large' verticalAlign='middle' />
                     <List.Content>
-                        <List.Header as='a' href={pd.html_url}>{pd.name}</List.Header>
+                        <List.Header as='a' target="_blank" href={pd.html_url}>{pd.name}</List.Header>
                         <List.Description >{pd.description}</List.Description>
                     </List.Content>
                 </List.Item>
@@ -44,7 +38,7 @@ function Pagination({ login, error, repos }) {
 
         setData(postData)
         setPageCount(Math.ceil(arr.length / perPage))
-        console.log(arr)
+        console.log(arl)
     }
 
     const handlePageClick = (e) => {
@@ -54,7 +48,9 @@ function Pagination({ login, error, repos }) {
     useEffect(() => {
         if (login == null) return null;
         getData()
-    }, [offset, login])
+
+
+    }, [offset, login, repos])
 
     if (error) {
         return (
