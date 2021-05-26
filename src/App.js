@@ -59,7 +59,6 @@ function App() {
   return (
     <div >
       <div className="navbar">
-
         <div className="input">
           <Form onSubmit={handleSubmit}>
             <Form.Group>
@@ -94,7 +93,6 @@ function App() {
         login={userName}
         repos={repos}
       />
-
     </div>
   );
 }

@@ -84,17 +84,3 @@ function Pagination({ login, error, repos }) {
     );
 }
 export default Pagination;
-{/* <div key={pd.id}>
-                    <p><a href={pd.html_url}>{pd.name}</a></p>
-                    <p>{pd.description}</p>
-                </div>) */}
-
-            //     <List divided relaxed >
-            //     <List.Item key={pd.id}>
-            //         <List.Icon name='github' size='large' verticalAlign='middle' />
-            //         <List.Content>
-            //             <List.Header as='a' href={pd.html_url}>{pd.name}</List.Header>
-            //             <List.Description as='a'>{pd.description}</List.Description>
-            //         </List.Content>
-            //     </List.Item>
-            // </List>
