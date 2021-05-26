@@ -12,7 +12,7 @@ function Pagination({ login, error, repos }) {
 
     const arl = []
     const pages = Math.ceil(repos / 100)
-    console.log(pages)
+
     for (let i = 1; i <= pages; i++) {
         arl.push(axios.get(`https://api.github.com/users/${login}/repos?page=2&per_page=100&page=${i}`))
     }
@@ -25,8 +25,8 @@ function Pagination({ login, error, repos }) {
 
         const sliced = arr.slice(offset, offset + perPage)
         const postData = sliced.map(pd =>
-            <div id="wrap">
-                <List.Item key={pd.id}>
+            <div id="wrap" key={pd.id}>
+                <List.Item >
                     <List.Icon name='github' size='large' verticalAlign='middle' />
                     <List.Content>
                         <List.Header as='a' target="_blank" href={pd.html_url}>{pd.name}</List.Header>
@@ -38,7 +38,7 @@ function Pagination({ login, error, repos }) {
 
         setData(postData)
         setPageCount(Math.ceil(arr.length / perPage))
-        console.log(arl)
+
     }
 
     const handlePageClick = (e) => {
