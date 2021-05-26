@@ -10,12 +10,22 @@ function Pagination({ login, error, repos }) {
     const [perPage] = useState(10);
     const [pageCount, setPageCount] = useState(0)
 
+
+    const pages = Math.ceil(repos / 100)
+    const arl = []
+    for (let i = 1; i <= pages; i++) {
+        arl.push(axios.get(`https://api.github.com/users/${login}/repos?page=2&per_page=100&page=${i}`))
+    }
+
+
+
     const getData = async () => {
         const arr = []
+
+
+
         await axios.all([
-            axios.get(`https://api.github.com/users/${login}/repos?page=2&per_page=100&page=1`),
-            axios.get(`https://api.github.com/users/${login}/repos?page=2&per_page=100&page=2`),
-            axios.get(`https://api.github.com/users/${login}/repos?page=2&per_page=100&page=3`),
+            ...arl
         ]).then(res => res.map(item => item.data))
             .then(data => arr.push(...data.flat()))
 
@@ -60,7 +70,7 @@ function Pagination({ login, error, repos }) {
     }
     if (repos === 0) {
         return (
-            <div className='reposNotFound'>                
+            <div className='reposNotFound'>
                 <img src='https://cdn2.iconfinder.com/data/icons/documents-and-files-v-2/100/doc-03-256.png' />
             </div>
         )
